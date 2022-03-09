@@ -1,0 +1,337 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <clocale> 
+#include <fstream>
+#include <Windows.h>
+
+#define n_size 2
+#define art_size 10
+#define name_size 15
+#define size 21
+using namespace std;
+
+struct Firm1
+{
+	int articul{};
+	char name[15]{};
+	int quantity{};
+	int price{};
+};
+
+struct Firm2
+{
+	int articul{};
+	char name[15]{};
+	int quantity{};
+	int price{};
+};
+
+struct Firm3
+{
+	int articul{};
+	char name[15]{};
+	int quantity{};
+	int price{};
+};
+
+const int n = 20;
+Firm1 firm1[n] = {};
+Firm2 firm2[n] = {};
+Firm3 firm3[n] = {};
+int k{};
+
+
+// вывод из файла
+
+void vivodizfileFirm1()
+{
+	
+	
+	ifstream file;
+	file.open("Firm1.txt");
+		
+			while (!file.eof())
+			{
+				file >> firm1[k].articul;
+				file >> firm1[k].name;
+				file >> firm1[k].quantity;
+				file >> firm1[k].price;
+				k++;
+				
+			}
+			k--;
+			file.close();
+}
+
+void vivodizfileFirm2()
+{
+	
+	ifstream file;
+	file.open("Firm2.txt");
+	if (file.is_open())
+	{
+		while (!file.eof())
+		{
+			file >> firm2[k].articul;
+			file >> firm2[k].name;
+			file >> firm2[k].quantity;
+			file >> firm2[k].price;
+			k++;
+			
+		}
+		k--;
+		
+		cout << "!!Данные получены из файла!!" << endl;
+	}
+	file.close();
+}
+
+void vivodizfileFirm3()
+{
+
+	ifstream file;
+	file.open("Firm3.txt");
+	if (file.is_open())
+	{
+		while (!file.eof())
+		{
+			file >> firm3[k].articul;
+			file >> firm3[k].name;
+			file >> firm3[k].quantity;
+			file >> firm3[k].price;
+			k++;
+			
+		}
+		k--;
+		
+		cout << "!!Данные получены из файла!!" << endl;
+	}
+	file.close();
+}
+
+// вывод на экран
+
+void vivod_table()
+{
+	cout << endl; 
+	cout << left << setw(n_size) << "№" << "|";
+	cout << left << setw(art_size) << "Артикул" << "|";
+	cout << left << setw(name_size) << "Название товара" << "|";
+	cout << left << setw(size) << "Количество товара, шт" << "|";
+	cout << left << setw(size) << "Цена за штуку, руб" << "|";
+
+}
+
+void vivodnaikranFirm1()
+{
+	cout << endl;
+	for (int i{}; i < k; i++)
+	{
+		cout << left << setw(n_size) << (i + 1) << "|";
+		cout << left << setw(art_size) << firm1[i].articul << "|";
+		cout << left << setw(name_size) << firm1[i].name << "|";
+		cout << left << setw(size) << firm1[i].quantity << "|";
+		cout << left << setw(size) << firm1[i].price << "|";
+		cout << endl;
+	}
+
+
+}
+
+void vivodnaikranFirm2()
+{
+	cout << endl;
+	for (int i{}; i < k; i++)
+	{
+		cout << left << setw(n_size) << (i + 1) << "|";
+		cout << left << setw(art_size) << firm2[i].articul << "|";
+		cout << left << setw(name_size) << firm2[i].name << "|";
+		cout << left << setw(size) << firm2[i].quantity << "|";
+		cout << left << setw(size) << firm2[i].price << "|";
+		cout << endl;
+	}
+
+
+}
+
+void vivodnaikranFirm3()
+{
+	cout << endl;
+	for (int i{}; i < k; i++)
+	{
+		cout << left << setw(n_size) << (i + 1) << "|";
+		cout << left << setw(art_size) << firm3[i].articul << "|";
+		cout << left << setw(name_size) << firm3[i].name << "|";
+		cout << left << setw(size) << firm3[i].quantity << "|";
+		cout << left << setw(size) << firm3[i].price << "|";
+		cout << endl;
+	}
+
+
+}
+
+// товары фирм
+
+void mainFirm1()
+{
+	vivodizfileFirm1();
+	vivod_table();
+	vivodnaikranFirm1();
+	
+}
+
+void mainFirm2()
+{
+	vivodizfileFirm2();
+	vivod_table();
+	vivodnaikranFirm2();
+}
+
+void mainFirm3()
+{
+	vivodizfileFirm3();
+	vivod_table();
+	vivodnaikranFirm3();
+}
+ 
+// добавление товаров
+
+void dobavlenie()
+{
+	cout << "В какую фирму хотите добавить товары." << endl;
+	cout << "[1] AutoDoc." << endl;
+	cout << "[2] CarHelp." << endl;
+	cout << "[3] Vehicle-Tuning." << endl;
+	cout << "Ввод -> ";
+	int vvod{};
+	cin >> vvod;
+	if ((vvod > 0) && (vvod <= 4))
+	{
+		switch (vvod)
+		{
+		case 1:
+			system("cls");
+			mainFirm1();
+			break;
+		case 2:
+			system("cls");
+			mainFirm2();
+			break;
+		case 3:
+			system("cls");
+			mainFirm3();
+			break;
+		}
+	}
+}
+
+// подменю
+
+void MainMenu()
+{
+	
+	cout << left << setw(art_size) << "Основное меню" << endl;
+	cout << "[1] Меню менеджера." << endl;
+	cout << "[2] Меню покупателя." << endl;
+	cout << "Ввод -> ";
+	
+}
+
+void viborfirm()
+{
+	int vvod{};
+	cin >> vvod;
+	if ((vvod > 0) && (vvod <= 4))
+	{
+		switch (vvod)
+		{
+		case 1:
+			system("cls");
+			mainFirm1();
+			break;
+		case 2:
+			system("cls");
+			mainFirm2();
+			break;
+		case 3:
+			system("cls");
+			mainFirm3();
+			break;
+		}
+	}
+}
+
+void MenuMenedjera()
+{
+	int vvod{};
+	cin >> vvod;
+	if ((vvod >= 0) && (vvod <= 4))
+	{
+		switch (vvod)
+		{
+			case 0:
+				break;
+		    case 1:
+				system("cls");
+				cout << left << setw(art_size) << "Фирмы." << endl;
+				cout << "[1] AutoDoc." << endl;
+				cout << "[2] CarHelp." << endl;
+				cout << "[3] Vehicle-Tuning." << endl;
+				cout << "Ввод -> ";
+				viborfirm();
+
+				break;
+			case 2:
+				system("cls");
+				dobavlenie();
+				cout << "В РАЗРАБОТКЕ...." << endl;
+				break;
+			case 3:
+				system("cls");
+				
+				break;
+			case 4:
+				system("cls");
+				cout << "В РАЗРАБОТКЕ...." << endl;
+				break;
+				
+		}
+	}
+}
+
+void MenuSelection()
+{
+	int vvod{};
+	MainMenu();
+	cin >> vvod;
+	if (vvod == 1)
+	{
+		system("cls");
+		cout << left << setw(art_size) << "Меню менеджера." << endl;
+		cout << "[1] Просмотр товаров." << endl;
+		cout << "[2] Добавление товаров." << endl;
+		cout << "[3] Статистика по артиклу." << endl;
+		cout << "[4] Статистика прибыли фирмы." << endl;
+		cout << "[0] В главное меню. " << endl;
+		cout << "Ввод -> ";
+		MenuMenedjera();
+	}
+	if (vvod == 2)
+	{
+		system("cls");
+		cout << "В РАЗРАБОТКЕ..........." << endl;
+		cout << left << setw(art_size) << "Меню покупателя." << endl;
+		cout << "[1] Корзина." << endl;
+		cout << "[0] В главное меню."; 
+	}
+}
+
+// Маин
+
+int main()
+{
+	setlocale(LC_ALL, "RUS");
+	system("chcp 1251 > nul");
+	MenuSelection();
+}
